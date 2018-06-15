@@ -2,7 +2,9 @@
 # Clustering - Gene Networks
 
 ```{r error=TRUE}
-# Download 2 datasets using wget
+###########################
+Download 2 datasets using wget
+###########################
 
 wget http://jnmaloof.github.io/BIS180L_web/data/DEgenes_GxE.csv #csv file of differentially expressioed genes 
 wget http://jnmaloof.github.io/BIS180L_web/data/voom_transform_brassica.csv # normally distributed version of differentially expressed genes 
@@ -60,7 +62,10 @@ plot(fit2) # dendogram with p-values
 # Heatmaps
 
 ```{r error=TRUE}
-# viewing the entire data matrix
+#######################
+viewing the entire data matrix
+#######################
+
 hclust_row <- hclust(dist(GxE_counts))
 plot(hclust_row)
 
