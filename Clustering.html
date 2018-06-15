@@ -123,14 +123,14 @@ $(document).ready(function () {
 
 <div id="clustering---gene-networks" class="section level1">
 <h1>Clustering - Gene Networks</h1>
-<pre class="r"><code>###########################
+<pre class="r"><code>################################
 Download 2 datasets using wget
-###########################
+################################
 
 wget http://jnmaloof.github.io/BIS180L_web/data/DEgenes_GxE.csv #csv file of differentially expressioed genes 
 wget http://jnmaloof.github.io/BIS180L_web/data/voom_transform_brassica.csv # normally distributed version of differentially expressed genes </code></pre>
 <pre><code>## Error: &lt;text&gt;:2:10: unexpected numeric constant
-## 1: ###########################
+## 1: ################################
 ## 2: Download 2
 ##             ^</code></pre>
 <pre class="r"><code>DE_genes &lt;- read.table(&quot;/home/Mitali/Desktop/project/DEgenes_GxE.csv&quot;, sep = &quot;,&quot;)</code></pre>
@@ -164,9 +164,9 @@ plot(hc) #redraw the tree everytime before adding the rectangles</code></pre>
 <pre class="r"><code>rect.hclust(hc, k = 4, border = &quot;red&quot;) #divides the dataset into groups</code></pre>
 <pre><code>## Error in rect.hclust(hc, k = 4, border = &quot;red&quot;): object 'hc' not found</code></pre>
 <pre class="r"><code># as we increase k, the number of clusters increase: becomes more specific</code></pre>
-<pre class="r"><code># Using pvclust to assing p-values to the clusters : determines clusters with good support
-
-library(pvclust)</code></pre>
+<div id="using-pvclust-to-assing-p-values-to-the-clusters-determines-clusters-with-good-support" class="section level3">
+<h3>Using pvclust to assing p-values to the clusters : determines clusters with good support</h3>
+<pre class="r"><code>library(pvclust)</code></pre>
 <pre><code>## Error in library(pvclust): there is no package called 'pvclust'</code></pre>
 <pre class="r"><code>set.seed(12456) #This ensures that we will have consistent results with one another
 
@@ -181,8 +181,8 @@ fit &lt;- pvclust(GxE_counts, method.hclust = &quot;ward.D&quot;, method.dist = 
 <pre class="r"><code># Green values -- Bootstrap Percentage 
 # Red values -- Approximate Unbiased</code></pre>
 </div>
-<div id="heatmaps" class="section level1">
-<h1>Heatmaps</h1>
+<div id="heatmaps" class="section level3">
+<h3>Heatmaps</h3>
 <pre class="r"><code>#######################
 viewing the entire data matrix
 #######################
@@ -195,6 +195,7 @@ heatmap.2(GxE_counts, Rowv = as.dendrogram(hclust_row), scale = &quot;row&quot;,
 ## 1: #######################
 ## 2: viewing the
 ##            ^</code></pre>
+</div>
 </div>
 
 

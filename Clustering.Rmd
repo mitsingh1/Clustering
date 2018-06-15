@@ -2,9 +2,9 @@
 # Clustering - Gene Networks
 
 ```{r error=TRUE}
-###########################
+################################
 Download 2 datasets using wget
-###########################
+################################
 
 wget http://jnmaloof.github.io/BIS180L_web/data/DEgenes_GxE.csv #csv file of differentially expressioed genes 
 wget http://jnmaloof.github.io/BIS180L_web/data/voom_transform_brassica.csv # normally distributed version of differentially expressed genes 
@@ -43,8 +43,8 @@ rect.hclust(hc, k = 4, border = "red") #divides the dataset into groups
 # as we increase k, the number of clusters increase: becomes more specific
 ```
 
+### Using pvclust to assing p-values to the clusters : determines clusters with good support
 ```{r error=TRUE}
-# Using pvclust to assing p-values to the clusters : determines clusters with good support
 
 library(pvclust)
 set.seed(12456) #This ensures that we will have consistent results with one another
@@ -59,7 +59,7 @@ plot(fit2) # dendogram with p-values
 # Red values -- Approximate Unbiased
 ```
 
-# Heatmaps
+### Heatmaps
 
 ```{r error=TRUE}
 #######################
