@@ -1,0 +1,68 @@
+
+# Clustering - Gene Networks
+
+```{r error=TRUE}
+# Download 2 datasets using wget
+
+wget http://jnmaloof.github.io/BIS180L_web/data/DEgenes_GxE.csv #csv file of differentially expressioed genes 
+wget http://jnmaloof.github.io/BIS180L_web/data/voom_transform_brassica.csv # normally distributed version of differentially expressed genes 
+```
+
+```{r error=TRUE}
+DE_genes <- read.table("/home/Mitali/Desktop/project/DEgenes_GxE.csv", sep = ",")
+head(DE_genes) 
+```
+
+```{r error=TRUE}
+brass_voom_E <- read_csv("/home/Mitali/Desktop/project/voom_transform_brassica.csv")
+head(brass_voom_E)
+```
+
+```{r error=TRUE}
+DE_gene_names <- row.names(DE_genes)
+
+GxE_counts <- as.data.frame(brass_voom_E[DE_gene_names,])
+
+GxE_counts <- as.matrix(GxE_counts) # some of the downstream steps require a data matrix
+
+hclust_row <- hclust(dist(GxE_counts)) #cluster by ROWS
+plot(hclust_row)
+
+hclust_col <- hclust(dist(t(GxE_counts))) #cluster by COLUMNS
+plot(hclust_col)
+```
+
+```{r error=TRUE}
+# Adding rectangles around the similar genes (clustering)
+
+plot(hc) #redraw the tree everytime before adding the rectangles
+rect.hclust(hc, k = 4, border = "red") #divides the dataset into groups
+
+# as we increase k, the number of clusters increase: becomes more specific
+```
+
+```{r error=TRUE}
+# Using pvclust to assing p-values to the clusters : determines clusters with good support
+
+library(pvclust)
+set.seed(12456) #This ensures that we will have consistent results with one another
+
+fit <- pvclust(GxE_counts, method.hclust = "ward.D", method.dist = "euclidean", nboot = 50)
+plot(fit) # outputs dendogram with p-values
+
+fit2 <- pvclust(GxE_counts, method.hclust = "ward.D", method.dist = "euclidean", nboot = 500)
+plot(fit2) # dendogram with p-values
+
+# Green values -- Bootstrap Percentage 
+# Red values -- Approximate Unbiased
+```
+
+# Heatmaps
+
+```{r error=TRUE}
+# viewing the entire data matrix
+hclust_row <- hclust(dist(GxE_counts))
+plot(hclust_row)
+
+heatmap.2(GxE_counts, Rowv = as.dendrogram(hclust_row), scale = "row", density.info="none", trace="none")
+```
